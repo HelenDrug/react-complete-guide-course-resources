@@ -1,6 +1,6 @@
-function App() {
+import type {ReactElement} from 'react';
 
-
+function App(): ReactElement {
     return (
         <main>
             <div id={"game-container"}>
@@ -10,7 +10,8 @@ function App() {
                 </ol>
             </div>
         </main>
-    )
+    );
 }
 
-export default App
+export default App;
+
