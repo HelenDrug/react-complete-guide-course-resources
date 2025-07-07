@@ -8,7 +8,8 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }]
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {
@@ -16,4 +17,3 @@
     }
   }
 }
-
