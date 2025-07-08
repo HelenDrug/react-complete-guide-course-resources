@@ -1,23 +1,12 @@
 import type { ReactElement } from 'react';
-import Player from './components/Player';
+import GameHeader from './components/game/GameHeader';
+import MainGame from './components/game/MainGame';
 
-function App(): ReactElement {
+export default function App(): ReactElement {
 	return (
 		<>
-			<header>
-				<img src="/game-logo.png" alt="Game Logo" />
-				<h1>Tic-Tac-Toe</h1>
-			</header>
-			<main>
-				<div id={'game-container'}>
-					<ol id={'players'}>
-						<Player name={'Player 1'} symbol={'X'} />
-						<Player name={'Player 2'} symbol={'0'} />
-					</ol>
-				</div>
-			</main>
+			<GameHeader />
+			<MainGame />
 		</>
 	);
 }
-
-export default App;
