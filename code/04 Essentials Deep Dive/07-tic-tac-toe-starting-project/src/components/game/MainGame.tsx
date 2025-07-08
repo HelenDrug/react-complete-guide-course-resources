@@ -1,7 +1,7 @@
 import { type ReactElement, useMemo, useState } from 'react';
 import GameBoard from './GameBoard';
 import Players from '../player/Players';
-import { type GameTurn, type GameBoardType, PlayerSymbol } from '../types';
+import { type GameTurn, type GameBoardType, PlayerSymbol, type PlayersRecord } from '../types';
 import Log from '../Log';
 import { WINNING_COMBINATIONS } from '../../util/winningCombinations';
 import GameOver from './GameOver';
@@ -47,20 +47,25 @@ const deriveGameBoard = (turns: GameTurn[]): GameBoardType => {
  * Derives the winner symbol based on the current game board state.
  * It checks all winning combinations to see if any player has won.
  * @param gameBoard - The current state of the game board, represented as a 2D array.
- *
+ * @param players - A record of players with their symbols and names.
  * @return The symbol of the winning player if there is a winner, otherwise an empty string.
  */
-const deriveWinnerSymbol = (gameBoard: GameBoardType): string => {
+const deriveWinnerSymbol = (gameBoard: GameBoardType, players: PlayersRecord): string => {
 	let winner;
 	for (const combinations of WINNING_COMBINATIONS) {
 		const [first, second, third] = combinations.map(
 			(pos) => gameBoard[pos.rowIndex][pos.columnIndex]
 		);
 		if (first && first === second && first === third) {
-			winner = first;
+			winner = players[first as PlayerSymbol].name;
 		}
 	}
 	return winner || '';
+};
+
+const PLAYERS: PlayersRecord = {
+	[PlayerSymbol.X]: { symbol: PlayerSymbol.X, name: 'Player 1' },
+	[PlayerSymbol.O]: { symbol: PlayerSymbol.O, name: 'Player 2' },
 };
 
 /**
@@ -68,12 +73,16 @@ const deriveWinnerSymbol = (gameBoard: GameBoardType): string => {
  * Manages the game state, handles player turns, and displays the game board, players, and game log.
  */
 export default function MainGame(): ReactElement {
-	// State to keep track of game turns
+	// State
 	const [gameTurns, setGameTurns] = useState<GameTurn[]>([]);
+	const [players, setPlayers] = useState<PlayersRecord>(PLAYERS);
 
 	const activePlayerSymbol = useMemo(() => deriveActivePlayerSymbol(gameTurns), [gameTurns]);
 	const gameBoard = useMemo(() => deriveGameBoard(gameTurns), [gameTurns]);
-	const winnerSymbol = useMemo(() => deriveWinnerSymbol(gameBoard), [gameBoard]);
+	const winnerSymbol = useMemo(
+		() => deriveWinnerSymbol(gameBoard, players),
+		[gameBoard, players]
+	);
 	const hasDraw = useMemo(
 		() => gameTurns.length === 9 && !winnerSymbol,
 		[gameTurns, winnerSymbol]
@@ -92,10 +101,21 @@ export default function MainGame(): ReactElement {
 
 	const handleRestartGame = () => setGameTurns([]);
 
+	const handlePlayerNameChange = (symbol: string, name: string) => {
+		setPlayers((prevPlayers) => ({
+			...prevPlayers,
+			[symbol]: name,
+		}));
+	};
+
 	return (
 		<main>
 			<div id={'game-container'}>
-				<Players activePlayerSymbol={activePlayerSymbol} />
+				<Players
+					players={PLAYERS}
+					activePlayerSymbol={activePlayerSymbol}
+					onChangeName={handlePlayerNameChange}
+				/>
 				{(winnerSymbol || hasDraw) && (
 					<GameOver winner={winnerSymbol} onRestart={handleRestartGame} />
 				)}

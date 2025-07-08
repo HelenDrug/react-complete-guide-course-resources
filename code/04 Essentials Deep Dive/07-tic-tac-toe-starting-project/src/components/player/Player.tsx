@@ -4,6 +4,7 @@ interface PlayerProps {
 	name: string;
 	symbol: string;
 	isActive: boolean;
+	onChangeName: (symbol: string, name: string) => void;
 }
 
 /**
@@ -12,13 +13,20 @@ interface PlayerProps {
  * @param name - The name of the player.
  * @param symbol - The symbol representing the player (e.g., 'X' or 'O').
  * @param isActive - Indicates if the player is currently active.
+ * @param onChangeName - Callback function to handle player name changes.
  */
-export default function Player({ name, symbol, isActive }: Readonly<PlayerProps>): ReactElement {
+export default function Player({
+	name,
+	symbol,
+	isActive,
+	onChangeName,
+}: Readonly<PlayerProps>): ReactElement {
 	const [isEditing, setIsEditing] = useState(false);
 	const [playerName, setPlayerName] = useState(name);
 
 	const handleEdit = () => {
 		setIsEditing((prevValue) => !prevValue);
+		if (isEditing) onChangeName(symbol, playerName);
 	};
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setPlayerName(event.target.value);

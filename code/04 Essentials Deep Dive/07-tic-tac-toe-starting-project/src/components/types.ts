@@ -18,3 +18,10 @@ export interface GameTurn {
 export type Combination = Position[];
 
 export type WinningCombinations = Combination[];
+
+export type Player = {
+	symbol: PlayerSymbol;
+	name: string;
+};
+
+export type PlayersRecord = Record<PlayerSymbol, Player>;
