@@ -1,16 +1,12 @@
 import { useRef } from 'react';
 
 import CartModal from './cart/CartModal';
-import type { ShoppingCart } from '../types';
+import { useCartContext } from '../store/cartContext';
 
-interface HeaderProps {
-	cart: ShoppingCart;
-	onUpdateCartItemQuantity: (id: string, amount: number) => void;
-}
-
-export default function Header({ cart, onUpdateCartItemQuantity }: HeaderProps) {
+export default function Header() {
 	const modal = useRef<{ open: () => void }>(null);
-	const cartQuantity = cart.items.length;
+
+	const { items } = useCartContext();
 
 	function handleOpenCartClick() {
 		modal.current?.open();
@@ -18,7 +14,7 @@ export default function Header({ cart, onUpdateCartItemQuantity }: HeaderProps) 
 
 	let modalActions = <button>Close</button>;
 
-	if (cartQuantity > 0) {
+	if (items.length > 0) {
 		modalActions = (
 			<>
 				<button>Close</button>
@@ -29,20 +25,14 @@ export default function Header({ cart, onUpdateCartItemQuantity }: HeaderProps) 
 
 	return (
 		<>
-			<CartModal
-				ref={modal}
-				cartItems={cart.items}
-				onUpdateCartItemQuantity={onUpdateCartItemQuantity}
-				title="Your Cart"
-				actions={modalActions}
-			/>
+			<CartModal ref={modal} title="Your Cart" actions={modalActions} />
 			<header id="main-header">
 				<div id="main-title">
 					<img src="logo.png" alt="Elegant model" />
 					<h1>Elegant Context</h1>
 				</div>
 				<p>
-					<button onClick={handleOpenCartClick}>Cart ({cartQuantity})</button>
+					<button onClick={handleOpenCartClick}>Cart ({items.length})</button>
 				</p>
 			</header>
 		</>

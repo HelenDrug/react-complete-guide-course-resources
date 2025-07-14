@@ -4,23 +4,13 @@ import type { ReactElement } from 'react';
 
 interface CartItemsProps {
 	items: CartItemType[];
-	onUpdateItemQuantity: (id: string, amount: number) => void;
 }
 
-export default function CartItems({
-	items,
-	onUpdateItemQuantity,
-}: Readonly<CartItemsProps>): ReactElement {
+export default function CartItems({ items }: Readonly<CartItemsProps>): ReactElement {
 	return (
 		<ul id="cart-items">
 			{items.map((item) => {
-				return (
-					<CartItem
-						key={item.id}
-						item={item}
-						onUpdateItemQuantity={onUpdateItemQuantity}
-					/>
-				);
+				return <CartItem key={item.id} item={item} />;
 			})}
 		</ul>
 	);

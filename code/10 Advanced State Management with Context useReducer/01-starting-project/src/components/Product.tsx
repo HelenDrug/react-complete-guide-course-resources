@@ -1,13 +1,15 @@
 import type { ProductType } from '../types';
 import type { ReactElement } from 'react';
+import { useCartContext } from '../store/cartContext';
 
 interface ProductProps {
 	product: ProductType;
-	onAddToCart: (id: string) => void;
 }
 
-export default function Product({ product, onAddToCart }: Readonly<ProductProps>): ReactElement {
+export default function Product({ product }: Readonly<ProductProps>): ReactElement {
 	const { id, image, title, price, description } = product;
+
+	const { addItemToCart } = useCartContext();
 	return (
 		<article className="product">
 			<img src={image} alt={title} />
@@ -18,7 +20,7 @@ export default function Product({ product, onAddToCart }: Readonly<ProductProps>
 					<p>{description}</p>
 				</div>
 				<p className="product-actions">
-					<button onClick={() => onAddToCart(id)}>Add to Cart</button>
+					<button onClick={() => addItemToCart(id)}>Add to Cart</button>
 				</p>
 			</div>
 		</article>
