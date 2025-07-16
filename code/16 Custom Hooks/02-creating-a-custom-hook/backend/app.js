@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 
@@ -34,7 +35,13 @@ app.get('/user-places', async (req, res) => {
   res.status(200).json({ places });
 });
 
-app.put('/user-places', async (req, res) => {
+const userPlacesLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+  message: { message: 'Too many requests, please try again later.' }
+});
+
+app.put('/user-places', userPlacesLimiter, async (req, res) => {
   const places = req.body.places;
 
   await fs.writeFile('./data/user-places.json', JSON.stringify(places));
