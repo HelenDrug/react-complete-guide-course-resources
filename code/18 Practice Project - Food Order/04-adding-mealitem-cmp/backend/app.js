@@ -2,8 +2,15 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
+
+const orderRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: { message: 'Too many requests, please try again later.' },
+});
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -20,7 +27,7 @@ app.get('/meals', async (req, res) => {
   res.json(JSON.parse(meals));
 });
 
-app.post('/orders', async (req, res) => {
+app.post('/orders', orderRateLimiter, async (req, res) => {
   const orderData = req.body.order;
 
   if (orderData === null || orderData.items === null || orderData.items.length === 0) {
