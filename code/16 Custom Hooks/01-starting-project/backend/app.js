@@ -19,7 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/places', async (req, res) => {
+const placesLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
+
+app.get('/places', placesLimiter, async (req, res) => {
   const fileContent = await fs.readFile('./data/places.json');
 
   const placesData = JSON.parse(fileContent);
