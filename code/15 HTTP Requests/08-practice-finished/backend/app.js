@@ -43,6 +43,12 @@ app.put('/user-places', userPlacesLimiter, async (req, res) => {
   res.status(200).json({ message: 'User places updated!' });
 });
 
+const userPlacesLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+  message: { message: 'Too many requests, please try again later.' },
+});
+
 // 404
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
