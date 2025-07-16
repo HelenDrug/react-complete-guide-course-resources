@@ -23,6 +23,12 @@ const putLimiter = RateLimit({
   max: 50, // Limit each IP to 50 requests per windowMs
   message: { message: 'Too many update requests, please try again later.' },
 });
+
+const getEventByIdLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // Limit each IP to 50 requests per windowMs
+  message: { message: 'Too many requests for event details, please try again later.' },
+});
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -73,7 +79,7 @@ app.get('/events/images', async (req, res) => {
   res.json({ images });
 });
 
-app.get('/events/:id', async (req, res) => {
+app.get('/events/:id', getEventByIdLimiter, async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile('./data/events.json');
