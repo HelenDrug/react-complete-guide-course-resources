@@ -23,7 +23,7 @@ export default function Login() {
       return;
     }
 
-    console.log(emailValue, passwordValue);
+    console.log(`Login attempt with email: ${emailValue}`);
   }
 
   return (
