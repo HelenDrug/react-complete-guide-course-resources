@@ -156,7 +156,7 @@ app.put('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.delete('/events/:id', async (req, res) => {
+app.delete('/events/:id', eventRateLimiter, async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile('./data/events.json');
