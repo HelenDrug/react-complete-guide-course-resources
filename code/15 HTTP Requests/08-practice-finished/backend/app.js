@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/places', async (req, res) => {
+app.get('/places', placesLimiter, async (req, res) => {
   const fileContent = await fs.readFile('./data/places.json');
 
   const placesData = JSON.parse(fileContent);
@@ -33,6 +33,12 @@ app.get('/user-places', userPlacesLimiter, async (req, res) => {
   const places = JSON.parse(fileContent);
 
   res.status(200).json({ places });
+});
+
+const placesLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // max 50 requests per windowMs
+  message: { message: 'Too many requests to /places, please try again later.' },
 });
 
 const userPlacesLimiter = rateLimit({
