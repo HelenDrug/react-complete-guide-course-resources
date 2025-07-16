@@ -48,7 +48,14 @@ app.get('/events', async (req, res) => {
   });
 });
 
-app.get('/events/images', async (req, res) => {
+import RateLimit from 'express-rate-limit';
+
+const imagesLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
+
+app.get('/events/images', imagesLimiter, async (req, res) => {
   const imagesFileContent = await fs.readFile('./data/images.json');
   const images = JSON.parse(imagesFileContent);
 
