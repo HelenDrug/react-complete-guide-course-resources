@@ -12,12 +12,17 @@ const deleteLimiter = RateLimit({
   message: { message: 'Too many delete requests, please try again later.' },
 });
 
+const postLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // Limit each IP to 50 requests per windowMs
+  message: { message: 'Too many create event requests, please try again later.' },
+});
+
 const putLimiter = RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 50, // Limit each IP to 50 requests per windowMs
   message: { message: 'Too many update requests, please try again later.' },
 });
-
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -87,7 +92,7 @@ app.get('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.post('/events', async (req, res) => {
+app.post('/events', postLimiter, async (req, res) => {
   const { event } = req.body;
 
   if (!event) {
