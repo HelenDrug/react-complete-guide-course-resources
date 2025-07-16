@@ -5,6 +5,7 @@ import {Question} from "../Question/Question";
 import {Answers} from "../Answer/Answers";
 import {QuizComplete} from "./QuizComplete";
 
+
 export function Quiz(): ReactElement {
     const [answers, setAnswers] = useState<(AnswerType | null)[]>([]);
 
