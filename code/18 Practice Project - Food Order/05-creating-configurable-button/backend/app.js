@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 
@@ -15,7 +16,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/meals', async (req, res) => {
+const mealsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per window
+  message: { message: 'Too many requests, please try again later.' },
+});
+
+app.get('/meals', mealsLimiter, async (req, res) => {
   const meals = await fs.readFile('./data/available-meals.json', 'utf8');
   res.json(JSON.parse(meals));
 });
