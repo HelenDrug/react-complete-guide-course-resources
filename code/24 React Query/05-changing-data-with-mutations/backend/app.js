@@ -81,7 +81,7 @@ app.get('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.post('/events', async (req, res) => {
+app.post('/events', limiter, async (req, res) => {
   const { event } = req.body;
 
   if (!event) {
