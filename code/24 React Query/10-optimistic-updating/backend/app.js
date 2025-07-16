@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 import RateLimit from 'express-rate-limit';
@@ -116,7 +117,13 @@ app.post('/events', async (req, res) => {
   res.json({ event: newEvent });
 });
 
-app.put('/events/:id', async (req, res) => {
+const eventUpdateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // Max 50 requests per window per IP
+  message: { message: 'Too many requests, please try again later.' },
+});
+
+app.put('/events/:id', eventUpdateLimiter, async (req, res) => {
   const { id } = req.params;
   const { event } = req.body;
 
