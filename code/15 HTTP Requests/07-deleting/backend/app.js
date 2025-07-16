@@ -40,7 +40,12 @@ app.get('/user-places', userPlacesLimiter, async (req, res) => {
   res.status(200).json({ places });
 });
 
-app.put('/user-places', async (req, res) => {
+const userPlacesPutLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // limit each IP to 50 requests per windowMs
+});
+
+app.put('/user-places', userPlacesPutLimiter, async (req, res) => {
   const places = req.body.places;
 
   await fs.writeFile('./data/user-places.json', JSON.stringify(places));
