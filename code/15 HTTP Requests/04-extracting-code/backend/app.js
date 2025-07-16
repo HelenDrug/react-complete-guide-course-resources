@@ -33,6 +33,11 @@ app.get('/user-places', async (req, res) => {
   res.status(200).json({ places });
 });
 
+const userPlacesLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 10, // limit each IP to 10 requests per windowMs
+});
+
 app.put('/user-places', userPlacesLimiter, async (req, res) => {
   const places = req.body.places;
 
