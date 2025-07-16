@@ -75,7 +75,12 @@ app.get('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.post('/events', async (req, res) => {
+const createEventLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // max 50 requests per window
+});
+
+app.post('/events', createEventLimiter, async (req, res) => {
   const { event } = req.body;
 
   if (!event) {
