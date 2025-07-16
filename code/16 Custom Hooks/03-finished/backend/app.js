@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/places', async (req, res) => {
+app.get('/places', userPlacesLimiter, async (req, res) => {
   const fileContent = await fs.readFile('./data/places.json');
 
   const placesData = JSON.parse(fileContent);
