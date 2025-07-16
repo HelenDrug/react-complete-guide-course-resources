@@ -110,7 +110,13 @@ app.post('/events', async (req, res) => {
   res.json({ event: newEvent });
 });
 
-app.put('/events/:id', async (req, res) => {
+const putEventLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // max 50 requests per windowMs
+  message: { message: 'Too many update requests, please try again later.' },
+});
+
+app.put('/events/:id', putEventLimiter, async (req, res) => {
   const { id } = req.params;
   const { event } = req.body;
 
