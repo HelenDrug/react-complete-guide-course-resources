@@ -22,7 +22,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/meals', async (req, res) => {
+const mealsRateLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: { message: 'Too many requests. Please try again later.' },
+});
+
+app.get('/meals', mealsRateLimiter, async (req, res) => {
   const meals = await fs.readFile('./data/available-meals.json', 'utf8');
   res.json(JSON.parse(meals));
 });
