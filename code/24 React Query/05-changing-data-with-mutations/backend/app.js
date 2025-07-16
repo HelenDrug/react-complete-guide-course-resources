@@ -2,8 +2,15 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import RateLimit from 'express-rate-limit';
 
 const app = express();
+
+// Set up rate limiter: maximum of 100 requests per 15 minutes
+const limiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+});
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -149,7 +156,7 @@ app.put('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.delete('/events/:id', async (req, res) => {
+app.delete('/events/:id', limiter, async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile('./data/events.json');
