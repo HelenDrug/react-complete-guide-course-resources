@@ -22,7 +22,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/events', async (req, res) => {
+const eventsRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests to /events. Please try again later.',
+});
+
+app.get('/events', eventsRateLimiter, async (req, res) => {
   const { max, search } = req.query;
   const eventsFileContent = await fs.readFile('./data/events.json');
   let events = JSON.parse(eventsFileContent);
