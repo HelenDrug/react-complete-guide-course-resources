@@ -5,3 +5,5 @@ export interface QuestionType {
 }
 
 export type AnswerType = string
+
+export type AnswerState = 'correct' | 'incorrect' | 'unanswered' | 'answered';

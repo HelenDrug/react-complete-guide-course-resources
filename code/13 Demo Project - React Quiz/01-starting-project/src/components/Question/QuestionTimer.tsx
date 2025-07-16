@@ -9,14 +9,21 @@ export function QuestionTimer({timeout, onTimeout}: QuestionTimerProps): ReactEl
     const [remainingTime, setRemainingTime] = useState(timeout);
 
     useEffect(() => {
-        setTimeout(onTimeout, timeout)
+        const timer = setTimeout(onTimeout, timeout)
+        return () => {
+            clearTimeout(timer);
+        };
     }, [onTimeout, timeout])
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             setRemainingTime(prevTime => prevTime - 100)
         }, 100)
-    }, [])
+
+        return () => {
+            clearInterval(interval)
+        };
+    }, [timeout])
 
     return (
         <progress id={"question-time"} max={timeout} value={remainingTime}/>

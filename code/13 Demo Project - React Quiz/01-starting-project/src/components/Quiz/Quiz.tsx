@@ -1,4 +1,4 @@
-import {type ReactElement, useState} from "react";
+import {type ReactElement, useCallback, useRef, useState} from "react";
 import type {AnswerType} from "../../types";
 import {QUESTIONS} from "../Question/questions";
 import {Question} from "../Question/Question";
@@ -11,14 +11,14 @@ export function Quiz(): ReactElement {
     const currentQuestion = QUESTIONS[answers.length];
     const quizIsComplete = answers.length === QUESTIONS.length;
 
-    let shuffledAnswers: AnswerType[] = [];
+    let shuffledAnswers: AnswerType[] = useRef<AnswerType[]>([]).current;
     if (currentQuestion) {
         shuffledAnswers = [...currentQuestion.answers].sort(() => Math.random() - 0.5);
     }
 
-    const handleSelectAnswer = (answer: AnswerType | null): void => {
+    const handleSelectAnswer = useCallback((answer: AnswerType | null): void => {
         setAnswers((prevAnswers) => [...prevAnswers, answer]);
-    }
+    }, []);
 
     return (
         <div id="quiz">
