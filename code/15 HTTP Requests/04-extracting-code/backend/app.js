@@ -2,9 +2,8 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
-
+import rateLimit from 'express-rate-limit';
 const app = express();
-
 app.use(express.static('images'));
 app.use(bodyParser.json());
 
@@ -34,7 +33,7 @@ app.get('/user-places', async (req, res) => {
   res.status(200).json({ places });
 });
 
-app.put('/user-places', async (req, res) => {
+app.put('/user-places', userPlacesLimiter, async (req, res) => {
   const places = req.body.places;
 
   await fs.writeFile('./data/user-places.json', JSON.stringify(places));
