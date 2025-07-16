@@ -49,7 +49,12 @@ app.get('/events', async (req, res) => {
   });
 });
 
-app.get('/events/images', async (req, res) => {
+const imagesLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 75, // max 75 requests per window
+});
+
+app.get('/events/images', imagesLimiter, async (req, res) => {
   const imagesFileContent = await fs.readFile('./data/images.json');
   const images = JSON.parse(imagesFileContent);
 
