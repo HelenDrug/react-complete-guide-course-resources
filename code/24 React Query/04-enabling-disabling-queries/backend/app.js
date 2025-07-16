@@ -2,11 +2,19 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import RateLimit from 'express-rate-limit';
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+// Set up rate limiter: maximum of 100 requests per 15 minutes
+const limiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
