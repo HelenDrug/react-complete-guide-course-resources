@@ -12,6 +12,12 @@ const orderRateLimiter = rateLimit({
   message: { message: 'Too many requests, please try again later.' },
 });
 
+const mealsRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200, // Limit each IP to 200 requests per windowMs
+  message: { message: 'Too many requests, please try again later.' },
+});
+
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -22,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/meals', async (req, res) => {
+app.get('/meals', mealsRateLimiter, async (req, res) => {
   const meals = await fs.readFile('./data/available-meals.json', 'utf8');
   res.json(JSON.parse(meals));
 });
