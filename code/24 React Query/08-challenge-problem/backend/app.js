@@ -116,7 +116,7 @@ app.post('/events', async (req, res) => {
   res.json({ event: newEvent });
 });
 
-app.put('/events/:id', async (req, res) => {
+app.put('/events/:id', eventRateLimiter, async (req, res) => {
   const { id } = req.params;
   const { event } = req.body;
 
