@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 
 const app = express();
+import RateLimit from 'express-rate-limit';
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -21,6 +22,12 @@ app.use((req, res, next) => {
   next();
 });
 
+const eventsRateLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
+
+app.use('/events', eventsRateLimiter);
 app.get('/events', async (req, res) => {
   const { max, search } = req.query;
   const eventsFileContent = await fs.readFile('./data/events.json');
@@ -48,7 +55,7 @@ app.get('/events', async (req, res) => {
   });
 });
 
-app.get('/events/images', async (req, res) => {
+app.get('/events/images', eventsRateLimiter, async (req, res) => {
   const imagesFileContent = await fs.readFile('./data/images.json');
   const images = JSON.parse(imagesFileContent);
 
@@ -149,7 +156,7 @@ app.put('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.delete('/events/:id', async (req, res) => {
+app.delete('/events/:id', eventsRateLimiter, async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile('./data/events.json');
