@@ -4,6 +4,12 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import RateLimit from 'express-rate-limit';
 
+const orderRateLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // limit each IP to 50 requests per windowMs
+  message: { message: 'Too many requests. Please try again later.' },
+});
+
 const app = express();
 
 app.use(bodyParser.json());
