@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 
@@ -55,7 +56,13 @@ app.get('/events/images', async (req, res) => {
   res.json({ images });
 });
 
-app.get('/events/:id', async (req, res) => {
+const eventRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests to /events/:id. Please try again later.',
+});
+
+app.get('/events/:id', eventRateLimiter, async (req, res) => {
   const { id } = req.params;
 
   const eventsFileContent = await fs.readFile('./data/events.json');
