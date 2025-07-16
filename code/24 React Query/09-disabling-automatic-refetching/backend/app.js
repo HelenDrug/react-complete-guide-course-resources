@@ -30,7 +30,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/events', async (req, res) => {
+// Configure rate limiter: maximum of 20 requests per minute for the /events route
+const eventsLimiter = RateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 20, // Limit each IP to 20 requests per windowMs
+  message: { message: 'Too many requests, please try again later.' },
+});
+
+app.get('/events', eventsLimiter, async (req, res) => {
   const { max, search } = req.query;
   const eventsFileContent = await fs.readFile('./data/events.json');
   let events = JSON.parse(eventsFileContent);
