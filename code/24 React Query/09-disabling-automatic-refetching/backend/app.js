@@ -4,6 +4,14 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import RateLimit from 'express-rate-limit';
 
+// Configure rate limiter: maximum of 10 requests per minute for the /events POST route
+const eventsPostLimiter = RateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // Limit each IP to 10 requests per windowMs
+  message: { message: 'Too many requests, please try again later.' },
+});
+
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -75,7 +83,7 @@ app.get('/events/:id', async (req, res) => {
   }, 1000);
 });
 
-app.post('/events', async (req, res) => {
+app.post('/events', eventsPostLimiter, async (req, res) => {
   const { event } = req.body;
 
   if (!event) {
