@@ -19,12 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 
-const placesGetLimiter = RateLimit({
+const userPlacesLimiter = RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // max 100 requests per windowMs
 });
 
-app.get('/places', placesGetLimiter, async (req, res) => {
+app.get('/places', userPlacesLimiter, async (req, res) => {
   const fileContent = await fs.readFile('./data/places.json');
 
   const placesData = JSON.parse(fileContent);
@@ -32,22 +32,12 @@ app.get('/places', placesGetLimiter, async (req, res) => {
   res.status(200).json({ places: placesData });
 });
 
-const userPlacesGetLimiter = RateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // max 100 requests per windowMs
-});
-
-app.get('/user-places', userPlacesGetLimiter, async (req, res) => {
+app.get('/user-places', userPlacesLimiter, async (req, res) => {
   const fileContent = await fs.readFile('./data/user-places.json');
 
   const places = JSON.parse(fileContent);
 
   res.status(200).json({ places });
-});
-
-const userPlacesLimiter = RateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // max 100 requests per windowMs
 });
 
 app.put('/user-places', userPlacesLimiter, async (req, res) => {
@@ -66,4 +56,6 @@ app.use((req, res, next) => {
   res.status(404).json({ message: '404 - Not Found' });
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
