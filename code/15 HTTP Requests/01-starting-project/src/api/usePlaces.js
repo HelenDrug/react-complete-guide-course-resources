@@ -22,7 +22,7 @@ export const useFetchPlaces=()=> {
         })();
     }, []);
 
-    return { places, error, loading };
+    return { places, error, loading, setPlaces };
 }
 
 export const updateUserPlaces = async (places) => {

@@ -5,14 +5,15 @@ import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces.jsx';
-import {updateUserPlaces} from "./api/usePlaces.js";
+import {updateUserPlaces, useFetchPlaces} from "./api/usePlaces.js";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 function App() {
   const selectedPlace = useRef();
 
-  const [userPlaces, setUserPlaces] = useState([]);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const {places, setPlaces: setUserPlaces, loading, error} = useFetchPlaces();
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -33,7 +34,7 @@ function App() {
       }
       return [selectedPlace, ...prevPickedPlaces];
     });
-    await updateUserPlaces([...userPlaces, selectedPlace])
+    await updateUserPlaces([...places, selectedPlace])
   }
 
   const handleRemovePlace = useCallback(async function handleRemovePlace() {
@@ -42,7 +43,7 @@ function App() {
     );
 
     setModalIsOpen(false);
-  }, []);
+  }, [setUserPlaces, places]);
 
   return (
     <>
@@ -62,10 +63,12 @@ function App() {
         </p>
       </header>
       <main>
+        {loading && <p>Loading your places...</p>}
+        {error && <ErrorPage title={"An error occurred!"} message={error.message}/>}
         <Places
           title="I'd like to visit ..."
           fallbackText="Select the places you would like to visit below."
-          places={userPlaces}
+          places={places}
           onSelectPlace={handleStartRemovePlace}
         />
 
