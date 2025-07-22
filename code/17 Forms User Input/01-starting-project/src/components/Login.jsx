@@ -1,24 +1,33 @@
+import Email from "./Form/Email.jsx";
+import Password from "./Form/Password/Password.jsx";
+import FormActions from "./Form/FormActions.jsx";
+import FormRow from "./Form/FormRow.jsx";
+import {useState} from "react";
+
 export default function Login() {
-  return (
-    <form>
-      <h2>Login</h2>
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-      <div className="control-row">
-        <div className="control no-margin">
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" />
-        </div>
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
 
-        <div className="control no-margin">
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" />
-        </div>
-      </div>
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    }
 
-      <p className="form-actions">
-        <button className="button button-flat">Reset</button>
-        <button className="button">Login</button>
-      </p>
-    </form>
-  );
+    const handleSubmit = (event)=> {
+        event.preventDefault();
+        console.log("User email:", email);
+    }
+    return (
+        <form onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            <FormRow>
+                <Email onChange={handleEmailChange} email={email} />
+                <Password onChange={handlePasswordChange} password={password}/>
+            </FormRow>
+            <FormActions/>
+        </form>
+    );
 }
