@@ -16,24 +16,18 @@ app.use((req, res, next) => {
   next();
 });
 
-const mealsRateLimiter = rateLimit({
+const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
   message: { message: 'Too many requests, please try again later.' },
 });
 
-app.get('/meals', mealsRateLimiter, async (req, res) => {
+app.get('/meals', rateLimiter, async (req, res) => {
   const meals = await fs.readFile('./data/available-meals.json', 'utf8');
   res.json(JSON.parse(meals));
 });
 
-const ordersRateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
-  message: { message: 'Too many requests, please try again later.' },
-});
-
-app.post('/orders', ordersRateLimiter, async (req, res) => {
+app.post('/orders', rateLimiter, async (req, res) => {
   const orderData = req.body.order;
 
   if (orderData === null || orderData.items === null || orderData.items.length === 0) {
