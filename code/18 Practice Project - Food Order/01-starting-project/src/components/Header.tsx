@@ -1,6 +1,13 @@
-import type {ReactElement} from "react";
+import {type ReactElement, useContext} from "react";
+import Button from "./UI/Button";
+import {CartContext} from "../store/CartContext";
+import {UserProgressContext} from "../store/UserProgressContext";
 
 export default function Header(): ReactElement {
+    const cartContext = useContext(CartContext)
+    const progressContext = useContext(UserProgressContext);
+
+    const totalCartItems = cartContext.items.reduce((total, item) => total + item.quantity, 0);
     return (
         <header id="main-header">
             <div id="title">
@@ -8,7 +15,7 @@ export default function Header(): ReactElement {
                 <h1>Meals</h1>
             </div>
             <nav>
-                <button>Cart (0)</button>
+                <Button textOnly onClick={progressContext.showCart}>Cart ({totalCartItems})</Button>
             </nav>
         </header>
     )
