@@ -5,7 +5,6 @@ interface MealsResponse {
     meals: MealType[],
     error: string | null,
     loading: boolean,
-    setMeals: (meals: MealType[]) => void
 }
 
 export const PATH = `${import.meta.env.VITE_PATH}`;
@@ -32,5 +31,5 @@ export const useGetMeals = (): MealsResponse => {
         })();
     }, []);
 
-    return {meals, error, loading, setMeals};
+    return {meals, error, loading};
 }

@@ -1,11 +1,13 @@
 import {createPortal} from "react-dom";
 import {type ReactElement, type ReactNode, useEffect, useRef} from "react";
 
-export default function Modal({children, open, classname = ''}: {
-    children: ReactNode,
-    open: boolean,
-    classname: string
-}): ReactElement {
+interface ModalProps {
+    children: ReactNode;
+    open: boolean;
+    classname?: string;
+    onClose: (() => void) | undefined
+}
+export default function Modal({children, open, classname = '', onClose}: ModalProps): ReactElement {
     const dialogRef = useRef(
         null as HTMLDialogElement | null
     )
@@ -21,5 +23,6 @@ export default function Modal({children, open, classname = ''}: {
     }, [open]);
 
     return createPortal(<dialog ref={dialogRef}
-                                className={`modal ${classname}`}>{children}</dialog>, document.getElementById("modal") as HTMLElement);
+                                className={`modal ${classname}`} onClose={onClose}>{children}</dialog>,
+        document.getElementById("modal") as HTMLElement);
 }

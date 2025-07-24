@@ -4,6 +4,7 @@ import Meals from "./components/Meals/Meals";
 import CartContextProvider from "./store/CartContext";
 import UserProgressContextProvider from "./store/UserProgressContext";
 import Cart from "./components/Cart/Cart";
+import Checkout from "./components/Checkout";
 
 export default function App(): ReactElement {
     return (
@@ -12,6 +13,7 @@ export default function App(): ReactElement {
                 <Header/>
                 <Meals/>
                 <Cart/>
+                <Checkout/>
             </CartContextProvider>
         </UserProgressContextProvider>
 

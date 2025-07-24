@@ -1,6 +1,7 @@
 import type {ReactElement} from "react";
-import {useGetMeals} from "../../api/useMealsData";
+import {useGetMeals} from "../../api/useGetMeals";
 import MealItem from "./MealItem";
+import Error from "../UI/Error";
 
 export default function Meals(): ReactElement {
     const {meals, error, loading} = useGetMeals();
@@ -8,7 +9,7 @@ export default function Meals(): ReactElement {
     return (
         <>
             {loading && <p>Loading...</p>}
-            {error && <p>Error: {error}</p>}
+            {error && <Error title="Failed to fetch meals" message={error}/>}
             <ul id="meals">
                 {meals.map(meal => <MealItem key={meal.id} meal={meal}/>)}
             </ul>

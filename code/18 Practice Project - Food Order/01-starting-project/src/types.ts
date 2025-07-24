@@ -13,7 +13,7 @@ export interface CartState {
     items: CartItemType[];
 }
 export interface CartAction {
-    type: 'ADD_ITEM' | 'REMOVE_ITEM';
+    type: 'ADD_ITEM' | 'REMOVE_ITEM' | 'CLEAR_CART';
     item?: CartItemType;
     itemId?: string;
 }
@@ -22,6 +22,7 @@ export interface CartContextType {
     items: CartItemType[];
     addItem: (item: CartItemType) => void;
     removeItem: (itemId: string) => void;
+    clearCart: () => void;
 }
 
 export type UserProgress = (
@@ -33,4 +34,17 @@ export interface UserProgressContextType {
     hideCart: () => void;
     showCheckout: () => void;
     hideCheckout: () => void;
+}
+
+export interface Customer {
+    fullName: string;
+    email: string;
+    street: string;
+    postalCode: string;
+    city: string;
+}
+
+export interface Order{
+    customer: Customer;
+    items: CartItemType[];
 }

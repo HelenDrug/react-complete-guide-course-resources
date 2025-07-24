@@ -1,4 +1,4 @@
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import {type ReactElement, useContext} from "react";
 import {CartContext} from "../../store/CartContext";
 import CartItem from "./CartItem";
@@ -8,21 +8,27 @@ import {UserProgressContext} from "../../store/UserProgressContext";
 
 export default function Cart(): ReactElement {
     const cartContext = useContext(CartContext)
-    const {items} = cartContext;
+    const {items, addItem, removeItem} = cartContext;
+
     const progressContext = useContext(UserProgressContext);
-    const {progress, hideCart} = progressContext;
+    const {progress, hideCart, showCheckout} = progressContext;
 
     const cartTotal = items.reduce((total, item) => total + Number(item.price) * item.quantity, 0).toFixed(2)
 
-    return (<Modal open={progress ==='cart'} classname="cart">
+    return (<Modal open={progress === 'cart'} classname="cart" onClose={progress === 'cart' ? hideCart : undefined}>
             <h2>Your Cart</h2>
             <ul>
-                {items.map(item => <CartItem key={item.id} cartItem={item}/>)}
+                {items.map(item =>
+                    <CartItem
+                        key={item.id}
+                        cartItem={item}
+                        onIncrease={() => addItem(item)}
+                        onDecrease={() => removeItem(item.id)}/>)}
             </ul>
             <p className="cart-total">{formatCurrency(cartTotal)}</p>
             <p className="modal-actions">
                 <Button textOnly onClick={hideCart}>Close </Button>
-                <Button>Checkout</Button>
+                {items.length > 0 && <Button onClick={showCheckout}>Checkout</Button>}
             </p>
         </Modal>
     )

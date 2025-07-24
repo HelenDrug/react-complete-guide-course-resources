@@ -1,6 +1,6 @@
 import {type ReactElement, useContext} from "react";
 import type {MealType} from "../../types";
-import {PATH} from "../../api/useMealsData";
+import {PATH} from "../../api/useGetMeals";
 import {formatCurrency} from "../../util/formatCurrency";
 import Button from "../UI/Button";
 import {CartContext} from "../../store/CartContext";
