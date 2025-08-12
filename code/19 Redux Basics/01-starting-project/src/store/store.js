@@ -1,15 +1,19 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
 
-const initialState = {
+const initialCountState = {
     count: 0,
     showCounter: true
+}
+
+const initialAuthState = {
+    isAuthenticated: false
 }
 
 // Using the createSlice function from Redux Toolkit simplifies the creation of reducers and actions
 // It automatically generates action creators and action types based on the reducer names
 const countSlice = createSlice({
     name: 'count',
-    initialState,
+    initialState: initialCountState,
     reducers: {
         increment(state, action) {
             state.count += action.payload;
@@ -19,6 +23,19 @@ const countSlice = createSlice({
         },
         toggle(state) {
             state.showCounter = !state.showCounter;
+        }
+    }
+})
+
+const authSlice = createSlice({
+    name: 'auth',
+    initialState: initialAuthState,
+    reducers: {
+        login(state) {
+            state.isAuthenticated = true;
+        },
+        logout(state) {
+            state.isAuthenticated = false;
         }
     }
 })
@@ -45,9 +62,13 @@ const countSlice = createSlice({
     return state;
 }*/
 const store = configureStore({
-    reducer: {count: countSlice.reducer}
+    reducer: {
+        count: countSlice.reducer,
+        auth: authSlice.reducer
+    }
 });
 
 export const countActions = countSlice.actions; // Exporting the actions to be used in components
+export const authActions = authSlice.actions;
 
 export default store;

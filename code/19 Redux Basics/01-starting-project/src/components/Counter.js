@@ -1,6 +1,6 @@
 import classes from './Counter.module.css';
 import {useSelector, useDispatch} from "react-redux";
-import {countActions} from "../store/countStore";
+import {countActions} from "../store/store";
 
 const Counter = () => {
     const counter = useSelector(state => state.count);
@@ -49,8 +49,7 @@ const Counter = () => {
             </>}
             <button onClick={handleCounterToggle}>Toggle Counter</button>
         </main>
-    )
-        ;
+    );
 };
 
 export default Counter;
