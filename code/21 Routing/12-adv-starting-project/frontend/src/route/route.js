@@ -8,6 +8,7 @@ import MainLayout from "../page/MainLayout";
 import EventsLayout from "../page/EventsLayout";
 import Error from "../page/Error";
 import {action as eventAction} from "../action"
+import Newsletter, {action as newsletterAction} from "../page/Newsletter";
 
 export const router = createBrowserRouter([
     {
@@ -27,6 +28,11 @@ export const router = createBrowserRouter([
                     },
                     {path: "new", element: <NewEvent/>, action: eventAction},
                 ]
+            },
+            {
+                path: 'newsletter',
+                element: <Newsletter />,
+                action: newsletterAction,
             },
         ]
     }
