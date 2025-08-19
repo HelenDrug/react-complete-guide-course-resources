@@ -2,7 +2,7 @@ import {Form, useNavigate, useNavigation} from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
-function EventForm({event}) {
+function EventForm({event, method = "POST"}) {
     const navigate = useNavigate();
     const navigation = useNavigation()
 
@@ -13,7 +13,7 @@ function EventForm({event}) {
     }
 
     return (
-        <Form method={"POST"} className={classes.form}>
+        <Form method={method} className={classes.form}>
             <p>
                 <label htmlFor="title">Title</label>
                 <input id="title" type="text" name="title" required defaultValue={event ? event.title : ""}/>
