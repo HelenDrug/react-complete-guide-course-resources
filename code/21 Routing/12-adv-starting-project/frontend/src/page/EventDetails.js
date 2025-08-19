@@ -12,24 +12,13 @@ export async function loader({params}){
                 }
             ), {status: 500})
     }
-    const data = await response.json();
-    console.log('Loader fetched data:', data);
-    if (!data.event) {
-        throw new Response(
-            JSON.stringify({ message: 'Event not found.' }),
-            { status: 404 }
-        );
-    }
-    return data;
+    return response;
 }
 
 export default function EventDetails() {
-    const data = useLoaderData();
-    console.log(data);
-    if (!data || !data.event) {
-        return <p>Event not found or failed to load.</p>;
-    }
+    //const params = useParams()
+    const data = useLoaderData()
     return (
-        <EventItem event={data.event}/>
+            <EventItem event={data.event}/>
     );
 }
