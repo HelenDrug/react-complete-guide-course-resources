@@ -1,12 +1,1 @@
-{
-  "events": [
-    {
-      "title": "A new event",
-      "image": "https://cdn.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/va-2016/muenchner-christkindlmarkt/christkindlmarkt-marienplat-logo-hp/document/christkindlmarkt-marienplat-logo-hp.jpg",
-      "date": "2022-10-01",
-      "description": "Some awesome event!",
-      "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
-    }
-  ],
-  "users": []
-}
+{"events":[{"title":"new event","image":"https://media.istockphoto.com/id/486585530/photo/berlin-skyline-with-spree-river-at-sunset-germany.jpg?s=612x612&w=0&k=20&c=COfGf3zm3CDWUUKv8Kowew73ie5wGr8DfJ0gd88EafQ=","date":"2025-08-16","description":"test new event","id":"e9196b8d-fb40-41e3-a71e-847c11e9d005"}],"users":[{"email":"test5@test.com","password":"$2a$12$cpr.RFgfp1KRG1w02S6pB..tDpKOCt2oeFS/SMJl.XPxk2QVYIAuC","id":"2a1215b0-8ceb-467f-b8a4-9de9586f6172"}]}
