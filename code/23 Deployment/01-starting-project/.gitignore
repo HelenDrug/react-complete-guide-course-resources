@@ -24,3 +24,13 @@ coverage/
 # Optional: ignore Vite cache
 .vite/
 
+# Ignore all XML files
+*.xml
+
+# JetBrains IDE default ignored files
+/shelf/
+/workspace.xml
+/httpRequests/
+/mavenHomeManager.xml
+/dataSources/
+/dataSources.local.xml
