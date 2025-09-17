@@ -34,9 +34,10 @@ export default function FindEventSection() {
       </header>
       {isLoading && <LoadingIndicator />}
       {isError && (
-        <ErrorBlock>
-          {error.info?.message || "Failed to fetch events"}
-        </ErrorBlock>
+        <ErrorBlock
+          title={"Failed to fetch events"}
+          message={error.info?.message || "Failed to fetch events"}
+        />
       )}
       {data && (
         <ul className="events-list">
