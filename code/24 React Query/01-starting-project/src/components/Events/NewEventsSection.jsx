@@ -9,39 +9,30 @@ export default function NewEventsSection() {
     queryKey: ["events"],
     queryFn: getEvents,
   });
-  let content;
-
-  if (isPending) {
-    content = <LoadingIndicator />;
-  }
-
-  if (isError) {
-    content = (
-      <ErrorBlock
-        title="An error occurred"
-        message={error.info?.message || "Failed to fetch events"}
-      />
-    );
-  }
-
-  if (data) {
-    content = (
-      <ul className="events-list">
-        {data.map((event) => (
-          <li key={event.id}>
-            <EventItem event={event} />
-          </li>
-        ))}
-      </ul>
-    );
-  }
 
   return (
     <section className="content-section" id="new-events-section">
       <header>
         <h2>Recently added events</h2>
       </header>
-      {content}
+      {isPending ? (
+        <LoadingIndicator />
+      ) : isError ? (
+        <ErrorBlock
+          title="An error occurred"
+          message={error.info?.message || "Failed to fetch events"}
+        />
+      ) : data && data.length > 0 ? (
+        <ul className="events-list">
+          {data.map((event) => (
+            <li key={event.id}>
+              <EventItem event={event} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No events found.</p>
+      )}
     </section>
   );
 }
