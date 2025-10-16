@@ -1,18 +1,11 @@
-import Link from 'next/link';
+import classes from './style/Page.module.css';
+import HomePageHeader from '../components/HomePage/HomePageHeader';
 
 export default function Home() {
   return (
-    <main>
-      <h1 style={{ color: 'white', textAlign: 'center' }}>Time to get started!</h1>
-      <p>
-        <Link href={'/meals'}>Go to Meals</Link>
-      </p>
-      <p>
-        <Link href={'/meals/share'}>Share a Meal</Link>
-      </p>
-      <p>
-        <Link href={'/community'}>Community</Link>
-      </p>
-    </main>
+    <>
+      <HomePageHeader classes={classes}/>
+      <main className={classes.section}></main>
+    </>
   );
 }
