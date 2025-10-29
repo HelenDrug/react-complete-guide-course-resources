@@ -1,13 +1,15 @@
 import MealsHeader from '../../components/Meals/MealsHeader';
 import Meals from '../../components/Meals/Meals';
-import { getMeals } from '../../db/meals';
+import { Suspense } from 'react';
+import LoadingPage from './loading-out';
 
-export default async function MealsPage() {
-  const meals = await getMeals();
+export default function MealsPage() {
   return (
     <>
       <MealsHeader />
-      <Meals meals={meals} />
+      <Suspense fallback={<LoadingPage />}>
+        <Meals />
+      </Suspense>
     </>
   );
 }

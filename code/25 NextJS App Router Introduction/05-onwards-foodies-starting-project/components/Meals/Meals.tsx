@@ -1,7 +1,8 @@
 import MealsGrid from './MealsGrid';
-import type { Meals } from '../../shared/types';
+import { getMeals } from '../../db/meals';
 
-export default function Meals({ meals }: Meals) {
+export default async function Meals() {
+  const meals = await getMeals();
   return (
     <main>
       <MealsGrid meals={meals} />
