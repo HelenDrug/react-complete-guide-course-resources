@@ -10,6 +10,6 @@ export interface MealType {
   creator: string;
 }
 
-export interface MealsGridProps {
+export interface Meals {
   meals: MealType[];
 }

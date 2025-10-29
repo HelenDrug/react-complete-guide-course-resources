@@ -21,6 +21,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/db/meals.js">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/db/meals.js" />
+              <option name="originalContent" value="import sql from 'better-sqlite3';&#10;import type { MealType } from '@/shared/types';&#10;&#10;const db = sql('meals.db');&#10;&#10;export async function getMeals() {&#10;  await new Promise((resolve) =&gt; setTimeout(resolve, 2000)); // Simulate delay&#10;  return db.prepare('SELECT * FROM meals').all();&#10;}&#10;" />
+              <option name="updatedContent" value="import sql from 'better-sqlite3';&#10;import type { MealType } from '@/shared/types';&#10;&#10;const db = sql('meals.db');&#10;&#10;export async function getMeals() {&#10;  await new Promise((resolve) =&gt; setTimeout(resolve, 2000)); // Simulate delay&#10;  return db.prepare('SELECT * FROM meals').all();&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
