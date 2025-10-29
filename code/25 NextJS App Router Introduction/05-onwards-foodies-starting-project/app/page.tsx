@@ -4,7 +4,7 @@ import HomePageHeader from '../components/HomePage/HomePageHeader';
 export default function Home() {
   return (
     <>
-      <HomePageHeader classes={classes}/>
+      <HomePageHeader classes={classes} />
       <main className={classes.section}></main>
     </>
   );

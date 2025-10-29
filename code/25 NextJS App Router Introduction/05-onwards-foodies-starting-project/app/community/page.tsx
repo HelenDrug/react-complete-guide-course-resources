@@ -5,8 +5,8 @@ import CommunityPerks from '../../components/Community/CommunityPerks';
 export default function CommunityPage() {
   return (
     <>
-     <CommunityHeader classes={classes}/>
-      <CommunityPerks classes={classes}/>
+      <CommunityHeader classes={classes} />
+      <CommunityPerks classes={classes} />
     </>
   );
 }
