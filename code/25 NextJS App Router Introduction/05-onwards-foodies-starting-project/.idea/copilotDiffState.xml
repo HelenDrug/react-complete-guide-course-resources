@@ -3,6 +3,15 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
+        <entry key="$PROJECT_DIR$/app/style/globals.css">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/style/globals.css" />
+              <option name="originalContent" value="@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&amp;family=Montserrat:wght@400;700&amp;display=swap');&#10;&#10;* {&#10;  box-sizing: border-box;&#10;}&#10;&#10;html {&#10;  font-family: 'Quicksand', sans-serif;&#10;}&#10;&#10;body {&#10;  margin: 0;&#10;  background: radial-gradient(#282c34, #282c34);&#10;}&#10;&#10;.not-found,&#10;.error {&#10;  margin-top: 5rem;&#10;  text-align: center;&#10;}&#10;&#10;.not-found h1,&#10;.error h1 {&#10;  font-size: 5rem;&#10;  margin: 0;&#10;  font-weight: 900;&#10;  color: #262626;&#10;  text-transform: uppercase;&#10;  -webkit-background-clip: text;&#10;  -webkit-text-fill-color: transparent;&#10;  background-size: cover;&#10;  background-image: linear-gradient(90deg, #ff8a00, #e52e71);&#10;  font-family: 'Montserrat', sans-serif;&#10;}&#10;&#10;.not-found p,&#10;.error p {&#10;  font-size: 1.5rem;&#10;  font-weight: 500;&#10;  color: #ddd8d8;&#10;}&#10;" />
+              <option name="updatedContent" value="@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&amp;family=Montserrat:wght@400;700&amp;display=swap');&#10;&#10;* {&#10;  box-sizing: border-box;&#10;}&#10;&#10;html {&#10;  font-family: 'Quicksand', sans-serif;&#10;}&#10;&#10;body {&#10;  margin: 0;&#10;  background: radial-gradient(#282c34, #282c34);&#10;}&#10;&#10;.not-found,&#10;.error {&#10;  margin-top: 5rem;&#10;  text-align: center;&#10;}&#10;&#10;.not-found h1,&#10;.error h1 {&#10;  font-size: 5rem;&#10;  margin: 0;&#10;  font-weight: 900;&#10;  color: #262626;&#10;  text-transform: uppercase;&#10;  -webkit-background-clip: text;&#10;  -webkit-text-fill-color: transparent;&#10;  background-size: cover;&#10;  background-image: linear-gradient(90deg, #ff8a00, #e52e71);&#10;  font-family: 'Montserrat', sans-serif;&#10;}&#10;&#10;.not-found p,&#10;.error p {&#10;  font-size: 1.5rem;&#10;  font-weight: 500;&#10;  color: #ddd8d8;&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/components/Meals/Header.module.css">
           <value>
             <PendingDiffInfo>
