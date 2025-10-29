@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/components/Meals/Header.module.css">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/components/Meals/Header.module.css" />
+              <option name="originalContent" value=".header {&#10;    gap: 3rem;&#10;    margin: 3rem auto 5rem auto;&#10;    width: 90%;&#10;    max-width: 75rem;&#10;    color: #ddd6cb;&#10;    font-size: 1.5rem;&#10;}&#10;&#10;.header h1 {&#10;    font-family: 'Montserrat', sans-serif;&#10;}&#10;&#10;.header p {&#10;    margin: 0;&#10;}" />
+              <option name="updatedContent" value=".header {&#10;    gap: 3rem;&#10;    margin: 3rem auto 5rem auto;&#10;    width: 90%;&#10;    max-width: 75rem;&#10;    color: #ddd6cb;&#10;    font-size: 1.5rem;&#10;}&#10;&#10;.header h1 {&#10;    font-family: 'Montserrat', sans-serif;&#10;}&#10;&#10;.header p {&#10;    margin: 0;&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/components/Meals/Header.tsx">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/components/Meals/Header.tsx" />
+              <option name="originalContent" value="import classes from './Header.module.css';&#10;&#10;export default function Header() {&#10;  return (&#10;    &lt;header className={classes.header}&gt;&#10;      &lt;h1&gt;Delicious Meals&lt;/h1&gt;&#10;      &lt;p&gt;Explore our collection of mouth-watering recipes!&lt;/p&gt;&#10;    &lt;/header&gt;&#10;  );&#10;}&#10;" />
+              <option name="updatedContent" value="import classes from './Header.module.css';&#10;&#10;export default function Header() {&#10;  return (&#10;    &lt;header className={classes.header}&gt;&#10;      &lt;h1&gt;Delicious Meals&lt;/h1&gt;&#10;      &lt;p&gt;Explore our collection of mouth-watering recipes!&lt;/p&gt;&#10;    &lt;/header&gt;&#10;  );&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

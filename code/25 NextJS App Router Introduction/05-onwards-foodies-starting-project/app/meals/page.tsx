@@ -1,12 +1,10 @@
-import Header from '../../components/Meals/Header';
+import MealsHeader from '../../components/Meals/MealsHeader';
 import Meals from '../../components/Meals/Meals';
-
-import classes from '/Page.module.css';
 
 export default function MealsPage() {
   return (
     <>
-      <Header />
+      <MealsHeader />
       <Meals />
     </>
   );
