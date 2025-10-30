@@ -1,3 +1,5 @@
+import ShareMeal from '../../../components/Meals/Meal/ShareMeal/ShareMeal';
+
 export default function ShareMealPage() {
-  return <h1>Share Meal Page</h1>;
+  return <ShareMeal />;
 }
