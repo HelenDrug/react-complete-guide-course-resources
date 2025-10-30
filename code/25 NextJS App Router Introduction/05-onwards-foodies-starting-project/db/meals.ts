@@ -9,3 +9,7 @@ export async function getMeals(): Promise<MealType[]> {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return db.prepare('SELECT * FROM meals').all() as MealType[];
 }
+
+export function getMeal(mealSlug: string): MealType {
+  return db.prepare('SELECT * FROM meals WHERE slug = ?').get(mealSlug) as MealType;
+}

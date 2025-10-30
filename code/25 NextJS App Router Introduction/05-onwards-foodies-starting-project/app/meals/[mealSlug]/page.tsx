@@ -1,3 +1,10 @@
-export default function MealDetailsPage() {
-  return <h1>Meal Details Page</h1>;
+import MealDetails from '../../../components/Meals/Meal/MealDetails';
+
+interface MealDetailsPageProps {
+  params: {
+    mealSlug: string;
+  };
+}
+export default function MealDetailsPage({ params }: MealDetailsPageProps) {
+  return <MealDetails mealSlug={params.mealSlug} />;
 }
