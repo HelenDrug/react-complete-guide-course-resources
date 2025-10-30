@@ -1,6 +1,6 @@
 import MealDetailsHeader from './MealDetailsHeader';
 import MealDetailsContent from './MealDetailsContent';
-import { getMeal } from '../../../db/meals';
+import { getMeal } from '../../../../db/meals';
 import { notFound } from 'next/navigation';
 
 export default function MealDetails({ mealSlug }: { mealSlug: string }) {

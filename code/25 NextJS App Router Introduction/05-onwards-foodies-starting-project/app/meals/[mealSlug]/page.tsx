@@ -1,4 +1,4 @@
-import MealDetails from '../../../components/Meals/Meal/MealDetails';
+import MealDetails from '../../../components/Meals/Meal/MealDetails/MealDetails';
 
 interface MealDetailsPageProps {
   params: {

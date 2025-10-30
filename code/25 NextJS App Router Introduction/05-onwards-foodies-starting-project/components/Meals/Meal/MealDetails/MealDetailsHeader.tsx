@@ -1,6 +1,6 @@
 import classes from './MealDetailsHeader.module.css';
 import Image from 'next/image';
-import type { MealType } from '../../../shared/types';
+import type { MealType } from '../../../../shared/types';
 
 interface MealDetailsHeaderProps {
   meal: MealType;
