@@ -1,4 +1,6 @@
-const sql = require('better-sqlite3');
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+import sql from 'better-sqlite3';
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call
 const db = sql('meals.db');
 
 const dummyMeals = [
@@ -174,7 +176,7 @@ db.prepare(
 `
 ).run();
 
-async function initData() {
+function initData() {
   const stmt = db.prepare(`
       INSERT INTO meals VALUES (
          null,
@@ -193,4 +195,4 @@ async function initData() {
   }
 }
 
-initData().then();
+initData();

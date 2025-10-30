@@ -38,7 +38,6 @@ export default function ImagePickerInput({
       ref={imageInput}
       onChange={handleImageChange}
       required
-      style={{ display: 'none' }}
     />
   );
 }

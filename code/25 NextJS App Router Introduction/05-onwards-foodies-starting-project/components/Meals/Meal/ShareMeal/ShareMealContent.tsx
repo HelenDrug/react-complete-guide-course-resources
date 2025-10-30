@@ -1,10 +1,11 @@
 import classes from './ShareMealContent.module.css';
 import ImagePicker from './ImagePicker';
+import { shareMeal } from '../../../../db/actions';
 
 export default function ShareMealContent() {
   return (
     <main className={classes.main}>
-      <form className={classes.form}>
+      <form className={classes.form} action={shareMeal}>
         <div className={classes.row}>
           <p>
             <label htmlFor="name">Your name</label>
