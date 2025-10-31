@@ -1,6 +1,7 @@
 import classes from './ShareMealContent.module.css';
 import ImagePicker from './ImagePicker';
 import { shareMeal } from '../../../../db/actions';
+import MealFormSubmit from './MealFormSubmit';
 
 export default function ShareMealContent() {
   return (
@@ -30,7 +31,7 @@ export default function ShareMealContent() {
         </p>
         <ImagePicker label={''} name="image" />
         <p className={classes.actions}>
-          <button type="submit">Share Meal</button>
+          <MealFormSubmit />
         </p>
       </form>
     </main>
