@@ -9,7 +9,7 @@ export default async function RSCDemo() {
       <p>
         <strong>NEVER</strong> on the client-side!
       </p>
-      {/* <ClientDemo /> */}
+      {/* <ClientDemo /> - its possible to use client components inside server components */}
     </div>
   );
 }
