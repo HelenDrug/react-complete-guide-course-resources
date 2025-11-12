@@ -1,10 +1,5 @@
 import * as fs from "node:fs/promises";
-
-type User = {
-  id: string;
-  name: string;
-  title: string;
-};
+import type { User } from "@/shared/types";
 
 export default async function DataFetchingDemo() {
   const data = await fs.readFile("dummy-db.json", "utf-8");
