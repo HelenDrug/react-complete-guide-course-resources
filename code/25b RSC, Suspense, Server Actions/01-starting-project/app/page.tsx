@@ -1,6 +1,7 @@
-import ServerActionsDemo from "@/components/ServerActionDemo";
+import UsePromiseDemo from "@/components/UsePromiseDemo";
+import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       {/* <ClientDemo>
@@ -8,7 +9,10 @@ export default function Home() {
          it's possible to use server components inside client components as children
       </ClientDemo>*/}
       {/*  <DataFetchingDemo />*/}
-      <ServerActionsDemo />
+      {/* <ServerActionsDemo />*/}
+      <Suspense fallback={<p>Loading users...</p>}>
+        <UsePromiseDemo />
+      </Suspense>
     </main>
   );
 }

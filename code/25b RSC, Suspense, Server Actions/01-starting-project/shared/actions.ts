@@ -14,3 +14,8 @@ export async function saveUserAction(formData: FormData) {
   instructors.push(newInstructor);
   fs.writeFileSync("dummy-db.json", JSON.stringify(instructors));
 }
+
+export async function getUsers(): Promise<User[]> {
+  const data = await fs.promises.readFile("dummy-db.json", "utf-8");
+  return JSON.parse(data);
+}

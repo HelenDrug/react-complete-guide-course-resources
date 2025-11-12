@@ -1,6 +1,6 @@
 import { getUsers } from "@/shared/actions";
 
-export default async function DataFetchingDemo() {
+export default async function UsePromiseDemo() {
   const users = await getUsers();
 
   return (
