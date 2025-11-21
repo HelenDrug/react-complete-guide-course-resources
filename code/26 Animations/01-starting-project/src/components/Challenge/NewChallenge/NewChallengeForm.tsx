@@ -5,6 +5,7 @@ import DescriptionSection from "./DescriptionSection.tsx";
 import ImagesSection from "./ImagesSection.tsx";
 import NewChallengeActions from "./NewChallengeActions.tsx";
 import { ChallengesContext } from "../../../store/ChallengesContext.ts";
+import DeadlineSection from "./DeadlineSection.tsx";
 
 interface NewChallengeFormProps {
   onDone: () => void;
@@ -32,7 +33,6 @@ export default function NewChallengeForm({ onDone }: NewChallengeFormProps) {
     ) {
       return;
     }
-
     const titleValue = title.current.value.trim();
     const descriptionValue = description.current.value.trim();
     const deadlineValue = deadline.current.value;
@@ -65,6 +65,7 @@ export default function NewChallengeForm({ onDone }: NewChallengeFormProps) {
     <form id="new-challenge" onSubmit={handleSubmit}>
       <TitleSection titleRef={title} />
       <DescriptionSection descriptionRef={description} />
+        <DeadlineSection deadlineRef={deadline}/>
       <ImagesSection
         onSelectImage={handleSelectImage}
         selectedImage={selectedImage}
