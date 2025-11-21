@@ -1,6 +1,6 @@
 import images from "../../../assets/images.ts";
 import type { Image } from "../../../shared/types.ts";
-import {motion, stagger} from "framer-motion";
+import { motion, stagger } from "framer-motion";
 
 interface ImagesSectionProps {
   onSelectImage: (image: Image) => void;
@@ -11,19 +11,22 @@ export default function ImagesSection({
   selectedImage,
 }: ImagesSectionProps) {
   return (
-    <motion.ul id="new-challenge-images" variants={{
+    <motion.ul
+      id="new-challenge-images"
+      variants={{
         visible: {
           transition: {
             delayChildren: stagger(0.1),
           },
         },
         hidden: {},
-    }}>
+      }}
+    >
       {images.map((image: Image) => (
         <motion.li
           variants={{
             hidden: { opacity: 0, scale: 0.5 },
-            visible: { opacity: 1, scale: 1 },
+            visible: { opacity: 1, scale: [0.8, 1] },
           }}
           transition={{ type: "spring" }}
           key={image.alt}

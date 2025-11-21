@@ -6,6 +6,7 @@ import ImagesSection from "./ImagesSection.tsx";
 import NewChallengeActions from "./NewChallengeActions.tsx";
 import { ChallengesContext } from "../../../store/ChallengesContext.ts";
 import DeadlineSection from "./DeadlineSection.tsx";
+import { stagger, useAnimate } from "framer-motion";
 
 interface NewChallengeFormProps {
   onDone: () => void;
@@ -14,6 +15,8 @@ export default function NewChallengeForm({ onDone }: NewChallengeFormProps) {
   const title = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLTextAreaElement>(null);
   const deadline = useRef<HTMLInputElement>(null);
+
+  const [scope, animate] = useAnimate();
 
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const { addChallenge } = useContext(ChallengesContext);
@@ -31,6 +34,11 @@ export default function NewChallengeForm({ onDone }: NewChallengeFormProps) {
       !deadline.current ||
       !selectedImage
     ) {
+      animate(
+        "input, textarea",
+        { x: [-10, 0] },
+        { type: "spring", duration: 0.2, delay: stagger(0.05) },
+      );
       return;
     }
     const titleValue = title.current.value.trim();
@@ -62,7 +70,7 @@ export default function NewChallengeForm({ onDone }: NewChallengeFormProps) {
   }
 
   return (
-    <form id="new-challenge" onSubmit={handleSubmit}>
+    <form id="new-challenge" onSubmit={handleSubmit} ref={scope}>
       <TitleSection titleRef={title} />
       <DescriptionSection descriptionRef={description} />
       <DeadlineSection deadlineRef={deadline} />
