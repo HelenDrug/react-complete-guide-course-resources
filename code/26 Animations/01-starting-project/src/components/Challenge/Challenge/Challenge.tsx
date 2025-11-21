@@ -1,6 +1,7 @@
 import type { Challenge } from "../../../shared/types.ts";
 import ChallengeHeader from "./ChallengeHeader.tsx";
 import ChallengeDetails from "./ChallengeDetails.tsx";
+import { motion } from "framer-motion";
 
 interface ChallengeProps {
   challenge: Challenge;
@@ -14,7 +15,7 @@ export default function Challenge({
   isExpanded,
 }: ChallengeProps) {
   return (
-    <li>
+    <motion.li layout exit={{ y: -30, opacity: 0 }}>
       <article className="challenge-item">
         <ChallengeHeader challenge={challenge} />
         <ChallengeDetails
@@ -23,6 +24,6 @@ export default function Challenge({
           isExpanded={isExpanded}
         />
       </article>
-    </li>
+    </motion.li>
   );
 }

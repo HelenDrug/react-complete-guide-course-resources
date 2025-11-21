@@ -3,6 +3,7 @@ import Challenge from "./Challenge/Challenge.tsx";
 import ChallengesMenu from "./ChallengesMenu.tsx";
 import type { AllChallenges, ChallengeStatus } from "../../shared/types.ts";
 import { ChallengesContext } from "../../store/ChallengesContext.ts";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Challenges() {
   const { challenges } = useContext(ChallengesContext);
@@ -41,19 +42,26 @@ export default function Challenges() {
         onSelectStatus={handleSelectStatus}
         selectedStatus={selectedStatus}
       >
-        {displayedChallenges.length > 0 && (
-          <ol className="challenge-items">
-            {displayedChallenges.map((challenge) => (
-              <Challenge
-                key={challenge.id}
-                challenge={challenge}
-                onViewDetails={() => handleViewDetails(challenge.id)}
-                isExpanded={expanded === challenge.id}
-              />
-            ))}
-          </ol>
-        )}
+        <AnimatePresence>
+          {displayedChallenges.length > 0 && (
+            <motion.ol
+              className="challenge-items"
+              exit={{ y: -30, opacity: 0 }}
+            >
+              <AnimatePresence>
+                {displayedChallenges.map((challenge) => (
+                  <Challenge
+                    key={challenge.id}
+                    challenge={challenge}
+                    onViewDetails={() => handleViewDetails(challenge.id)}
+                    isExpanded={expanded === challenge.id}
+                  />
+                ))}
+              </AnimatePresence>
+            </motion.ol>
+          )}
         {displayedChallenges.length === 0 && <p>No challenges found.</p>}
+        </AnimatePresence>
       </ChallengesMenu>
     </div>
   );
