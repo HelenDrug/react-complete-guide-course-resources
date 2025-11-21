@@ -60,7 +60,7 @@ export default function Challenges() {
               </AnimatePresence>
             </motion.ol>
           )}
-        {displayedChallenges.length === 0 && <p>No challenges found.</p>}
+          {displayedChallenges.length === 0 && <p>No challenges found.</p>}
         </AnimatePresence>
       </ChallengesMenu>
     </div>
