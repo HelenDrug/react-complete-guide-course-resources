@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface ChallengeDetailsProps {
   description: string;
   onViewDetails: () => void;
@@ -14,7 +16,14 @@ export default function ChallengeDetails({
       <p>
         <button onClick={onViewDetails}>
           View Details{" "}
-          <span className="challenge-item-details-icon">&#9650;</span>
+          <motion.span
+            className="challenge-item-details-icon"
+            animate={{
+              rotate: isExpanded ? 180 : 0,
+            }}
+          >
+            &#9650;
+          </motion.span>
         </button>
       </p>
 

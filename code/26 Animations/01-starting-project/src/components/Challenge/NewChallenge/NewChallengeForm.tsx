@@ -65,7 +65,7 @@ export default function NewChallengeForm({ onDone }: NewChallengeFormProps) {
     <form id="new-challenge" onSubmit={handleSubmit}>
       <TitleSection titleRef={title} />
       <DescriptionSection descriptionRef={description} />
-        <DeadlineSection deadlineRef={deadline}/>
+      <DeadlineSection deadlineRef={deadline} />
       <ImagesSection
         onSelectImage={handleSelectImage}
         selectedImage={selectedImage}
