@@ -39,8 +39,7 @@ main {
 }
 
 .accordion {
-  margin: 2rem 0;
-  border: 1px solid #5d6273;
+    border: 1px solid #5d6273;
   border-radius: 6px;
   overflow: hidden;
   list-style: none;
@@ -62,13 +61,15 @@ main {
 }
 
 .accordion-item-content {
-  display: none;
   padding: 1rem;
   background-color: #2c344a;
 }
 
 .open {
   display: block;
+}
+.close {
+  display: none;
 }
 
 .searchable-list {
