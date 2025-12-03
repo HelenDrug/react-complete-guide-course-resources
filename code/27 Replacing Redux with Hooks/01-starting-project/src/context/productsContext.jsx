@@ -1,6 +1,6 @@
 import {createContext, useState} from "react";
 
-const Products = [
+export const Products = [
     {
         id: 'p1',
         title: 'Red Scarf',
