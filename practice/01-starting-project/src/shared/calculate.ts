@@ -1,10 +1,3 @@
-export interface UserInput {
-  currentSavings: number;
-  yearlyContribution: number;
-  expectedReturn: number;
-  duration: number;
-}
-
 export interface YearlyData {
   year: number;
   yearlyInterest: number;
