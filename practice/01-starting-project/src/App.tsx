@@ -1,37 +1,20 @@
 import React from "react";
 import logo from "./assets/investment-calculator-logo.png";
 import Header from "./components/Header";
-import SavingsForm from "./components/Savings/SavingsForm";
+import UserInputForm from "./components/Savings/UserInput/UserInputForm";
+import ResultTable from "./components/Savings/ResultTable/ResultTable";
 
 export default function App() {
+  const result = null; // Placeholder for result data
   return (
-    <div>
+    <>
       <Header logo={logo} />
-      <SavingsForm />
-
-      {/* Todo: Show below table conditionally (only once result data is available) */}
-      {/* Show fallback text if no data is available */}
-
-      <table className="result">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Total Savings</th>
-            <th>Interest (Year)</th>
-            <th>Total Interest</th>
-            <th>Invested Capital</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <UserInputForm />
+      {result ? (
+        <ResultTable />
+      ) : (
+        <p className="fallback">No investment calculated yet.</p>
+      )}
+    </>
   );
 }

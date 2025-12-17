@@ -11,17 +11,13 @@ export default function SavingsFormActions({
   const handleReset = () => {
     console.log("Form reset");
   };
-  const handleCalculate = () => {
-    const result = calculateHandler(userInput);
-    console.log("Calculate clicked");
-  };
 
   return (
     <p className="actions">
       <button type="reset" className="buttonAlt" onClick={handleReset}>
         Reset
       </button>
-      <button type="submit" className="button" onClick={handleCalculate}>
+      <button type="submit" className="button">
         Calculate
       </button>
     </p>
